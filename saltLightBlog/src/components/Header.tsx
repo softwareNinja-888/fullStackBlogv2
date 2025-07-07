@@ -1,18 +1,13 @@
 import { MobileMenu } from './helper/MobileMenu'
+import { Line } from "./helper/Line";
 import { LogoSvg } from './helper/LogoSvg';
 
 import { useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 import React from 'react';
+
 import { useQuery } from '@tanstack/react-query';
-
-function Line({direction = 'horizontal',width='w-full',classStyle=''}){
-
-    return (
-       <div className={direction === 'horizontal' ? `w-full h-px bg-black ${width} ${classStyle}` : `h-full w-px bg-black ${width} ${classStyle}`}></div>
-    )
-}
 
 export function Header({
     logoImg='/logo.svg',
@@ -24,12 +19,13 @@ export function Header({
   const { data, isLoading } = useQuery({
     queryKey: ['siteTitle'],
     queryFn: async () => {
-      const res = await fetch('https://dummyapi.io/header-title');
+      const res = await fetch('http://localhost:3000/api/posts');
       return res.json();
     },
   });
 
   const [menuOpen, setMenuOpen ] = useState(false)
+  const [error, setError ] = useState()
   const navigate = useNavigate()
 
  
@@ -41,7 +37,13 @@ export function Header({
     navigate({ to: cleaned });
   }
 
-  // return <h1>{isLoading ? 'Loading title...' : data?.title}</h1>;
+
+  useEffect(() => {
+    if (data) console.log('DATA FROM API:', data);
+    if (error) console.error('Error fetching:', error);
+  }, [data, error]); 
+
+   // return <h1>{isLoading ? 'Loading title...' : data?.title}</h1>;
 
     return ( 
         <>
