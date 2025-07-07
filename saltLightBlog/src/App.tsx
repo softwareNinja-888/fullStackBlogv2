@@ -8,7 +8,7 @@ import './App.css'
 import Home from './pages/Home';
 import Blogs from './pages/Blogs';
 import BlogPage from './pages/BlogPage';
-import Layout from './pages/Layout';
+import { Layout } from './pages/Layout';
 
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -41,7 +41,7 @@ const routeTree = rootRoute.addChildren([
   createRoute({
     path: '/',
     getParentRoute: () => rootRoute,
-    component: () => <div>Welcome to homepage</div>,
+    component: () => <Home/>,
   }),
   blogsRoute,
   BlogPageRoute,
