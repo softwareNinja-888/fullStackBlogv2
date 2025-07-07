@@ -98,7 +98,7 @@ export function NewsLetter() {
   const [showToast, setShowToast] = useState(false);
 
   // Formbold URL - consider using environment variables in production
-  const formBoldUrl =  import.meta.env.FORM_BOLD_URL;
+  const formBoldUrl =  import.meta.env.VITE_FORM_URL;
 
   // Handle toast visibility
   useEffect(() => {

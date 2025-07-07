@@ -19,7 +19,7 @@ export function Header({
   const { data, isLoading } = useQuery({
     queryKey: ['siteTitle'],
     queryFn: async () => {
-      const res = await fetch(`${import.meta.env.VITE_FORM_URL}/posts`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/posts`);
       return res.json();
     },
   });

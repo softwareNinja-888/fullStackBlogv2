@@ -6,7 +6,7 @@ import './App.css'
 
 // PAGES:
 import Home from './pages/Home';
-import Blogs from './pages/Blogs';
+import {Blogs} from './pages/Blogs';
 import BlogPage from './pages/BlogPage';
 import { Layout } from './pages/Layout';
 
