@@ -1,0 +1,1 @@
+export default function Hero() { return <section><p>Welcome to our blog!</p></section>; } 
