@@ -19,7 +19,7 @@ export function Header({
   const { data, isLoading } = useQuery({
     queryKey: ['siteTitle'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:3000/api/posts');
+      const res = await fetch(`${import.meta.env.VITE_FORM_URL}/posts`);
       return res.json();
     },
   });
@@ -59,7 +59,7 @@ export function Header({
                 <nav className={`hidden md:flex md:space-x-10 lg:space-x-20 text-xl font-mont`}>
                     {links.map((link,index)=>{
                         return ( 
-                            <div key={index} className={`flex gap-1.5 no-underline relative cursor-pointer after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:opacity-0 after:transition-opacity after:duration-300 after:ease-in-out hover:after:opacity-100 hover:after:bg-black text-black max-[500px]:text-xs` } onClick={()=>{handleNav(`/${link === 'Home' ? '' : link}`)}}>
+                            <div key={index} className={`flex gap-1.5 no-underline relative cursor-pointer after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:opacity-0 after:transition-opacity after:duration-1000 after:ease-in-out hover:after:opacity-100 hover:after:bg-black text-black max-[500px]:text-xs` } onClick={()=>{handleNav(`/${link === 'Home' ? '' : link}`)}}>
                                 {link}
                             </div>
                         )
