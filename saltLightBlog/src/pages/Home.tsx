@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <div className="overflow-x-hidden">
         <Hero/>
-        <NewsLetter/>
+        {/*<NewsLetter/>*/}
         <PostList/>
       </div>
     </>
