@@ -1,128 +1,271 @@
-import { Line } from "./helper/Line";
-import { Eye, MessageCircle, Heart } from "lucide-react";
-import { Link } from '@tanstack/react-router';
+// import { Line } from "./helper/Line";
+// import { Eye, MessageCircle, Heart } from "lucide-react";
+// import { Link } from '@tanstack/react-router';
 
-function truncateText(text,maxLength=244){
-    if (text === undefined){
-        return
+// function truncateText(text,maxLength=244){
+//     if (text === undefined){
+//         return
+//     }
+//     return text.length > maxLength ? text.slice(0,maxLength) + '....': text;
+// } 
+
+// function isWithinXDays(dateStr){
+//     const now = new Date()
+//     const targetDate = new Date(dateStr)
+
+//     const diffInMs = now - targetDate
+//     const diffInDays = diffInMs / (1000 * 60 * 60 *24)
+
+//     return diffInDays >= 0 && diffInDays <= 5;
+// }
+
+// export function Card({
+//   postName = 'Back to Fiction: What I am reading this year.',
+//   feature = false,
+//   postInfo = {},
+//   isNew = false,
+//   img = 'https://fakeimg.pl/600x400?text=profile',
+//   width = 'w-100',
+// }) {
+
+//     // TEMP FIND BETTER WAY IN FUTURE:\
+//   const getSummary = (content, maxLength = 180) => {
+//     if (typeof content !== 'string') return '';
+//     return content.length > maxLength
+//       ? content.slice(0, maxLength).trim() + '...'
+//       : content;
+//   };
+
+//   const formattedContent = getSummary(postInfo.content)
+
+//   console.log('summary:',formattedContent)
+//   const newStatus = isWithinXDays(postInfo.createdAt);
+
+//   function formatDate(dateStr) {
+//     const date = new Date(dateStr);
+//     return date.toLocaleDateString('en-GB', {
+//       day: 'numeric',
+//       month: 'short',
+//       year: 'numeric',
+//     });
+//   }
+
+//   function estimateReadingTime(content) {
+//     const words = content?.split(/\s+/).length || 0;
+//     const wordsPerMinute = 200;
+//     return Math.ceil(words / wordsPerMinute);
+//   }
+
+//   return (
+//     <div className={`flex flex-col gap-5 px-10 py-10 ${width} min-h-fit text-black`}>
+//       {feature && (
+//         <div className="font-mono text-lg border border-black w-1/3 px-2 py-1 text-center">
+//           Featured Post
+//         </div>
+//       )}
+
+//       <Link to={`/blogs/${postInfo.slug}`} className={`relative group border-1 border-black cursor-pointer ${feature ? 'w-1/3' : 'w-full'}`}>
+//         {/* Image */}
+//         <div className="overflow-hidden aspect-w-1 aspect-h-1">
+//           <img
+//             className="object-cover w-full h-74 transition-all duration-300 group-hover:scale-125"
+//             src={postInfo.featuredImage || img}
+//             alt={`${postInfo.title || postName} image`}
+//           />
+//         </div>
+
+//         {/* New status */}
+//         {newStatus && (
+//           <div className="absolute left-3 top-3">
+//             <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-700 uppercase bg-white">New</p>
+//           </div>
+//         )}
+
+//         {/* Text */}
+//         <div className="flex flex-col">
+//           <div className="p-3">
+//             <div className="flex gap-2 font-poppins text-sm mb-3">
+//               <img src={postInfo.author?.avatar} alt="profile image" className="w-8 h-8" />
+//               <div className="self-center">{postInfo.author?.name}</div>
+//             </div>
+//             <div className="flex font-geist text-sm gap-2">
+//               <div>{formatDate(postInfo.createdAt)}</div>
+//               <div> &#183;</div>
+//               <div>{estimateReadingTime(postInfo.content)} min read</div>
+//             </div>
+//           </div>
+
+//           <div className="flex flex-col gap-2 p-3 text-md h-40">
+//             <div className="font-poppins">{postInfo.title}</div>
+//             <div className="font-roboto text-sm">{truncateText(postInfo.summary || formattedContent)}</div>
+//           </div>
+
+//           <div className="flex justify-center my-0">
+//             <Line width="w-64" />
+//           </div>
+
+//           <div className="flex justify-between py-2 px-1">
+//             <div className="flex items-center justify-center gap-4">
+//               <div className="flex gap-2 justify-center items-center">
+//                 <Eye className="w-4 h-4 self-center"/>
+//                 <div>0</div>
+//               </div>
+//               <div className="flex gap-2">
+//                 <MessageCircle className="w-4 h-4 self-center" />
+//                 <div>{postInfo.comments?.length || 0}</div>
+//               </div>
+//             </div>
+//             <div className="flex flex-row-reverse gap-2">
+//               <Heart className="w-4 h-4 self-center" />
+//               <div>{postInfo.likes?.length || 0}</div>
+//             </div>
+//           </div>
+//         </div>
+//       </Link>
+//     </div>
+//   );
+// }
+
+import { Eye, MessageCircle, Heart, Clock, Calendar } from "lucide-react";
+
+function truncateText(text, maxLength = 244) {
+    if (text === undefined) {
+        return '';
     }
-    return text.length > maxLength ? text.slice(0,maxLength) + '....': text;
-} 
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+}
 
-function isWithinXDays(dateStr){
-    const now = new Date()
-    const targetDate = new Date(dateStr)
-
-    const diffInMs = now - targetDate
-    const diffInDays = diffInMs / (1000 * 60 * 60 *24)
-
+function isWithinXDays(dateStr) {
+    const now = new Date();
+    const targetDate = new Date(dateStr);
+    const diffInMs = now - targetDate;
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     return diffInDays >= 0 && diffInDays <= 5;
 }
 
 export function Card({
-  postName = 'Back to Fiction: What I am reading this year.',
-  feature = false,
-  postInfo = {},
-  isNew = false,
-  img = 'https://fakeimg.pl/600x400?text=profile',
-  width = 'w-100',
+    postName = 'Back to Fiction: What I am reading this year.',
+    feature = false,
+    postInfo = {},
+    isNew = false,
+    img = 'https://fakeimg.pl/600x400?text=profile',
+    width = 'w-100',
 }) {
-
-    // TEMP FIND BETTER WAY IN FUTURE:\
-    const getSummary = (content, maxLength = 180) => {
-      const parsed = typeof content === 'string' ? JSON.parse(content) : content;
-      const combined = Object.values(parsed).join(' ');
-      return combined.length > maxLength
-        ? combined.slice(0, maxLength).trim() + '...'
-        : combined;
+    const getSummary = (content, maxLength = 160) => {
+        if (typeof content !== 'string') return '';
+        return content.length > maxLength
+            ? content.slice(0, maxLength).trim() + '...'
+            : content;
     };
-  
-  const formattedContent = getSummary(postInfo.content)
 
-  console.log('summary:',formattedContent)
-  const newStatus = isWithinXDays(postInfo.createdAt);
+    const formattedContent = getSummary(postInfo.content);
+    const newStatus = isWithinXDays(postInfo.createdAt);
 
-  function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    });
-  }
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+        });
+    }
 
-  function estimateReadingTime(content) {
-    const words = content?.split(/\s+/).length || 0;
-    const wordsPerMinute = 200;
-    return Math.ceil(words / wordsPerMinute);
-  }
+    function estimateReadingTime(content) {
+        const words = content?.split(/\s+/).length || 0;
+        const wordsPerMinute = 200;
+        return Math.ceil(words / wordsPerMinute);
+    }
 
-  return (
-    <div className={`flex flex-col gap-5 px-10 py-10 ${width} min-h-fit text-black`}>
-      {feature && (
-        <div className="font-mono text-lg border border-black w-1/3 px-2 py-1 text-center">
-          Featured Post
+    return (
+        <div className={`${width} p-4`}>
+            {/* Featured Badge */}
+            {feature && (
+                <div className="mb-4">
+                    <span className="inline-block px-3 py-1 text-xs font-bold tracking-wide text-white bg-black uppercase">
+                        Featured Post
+                    </span>
+                </div>
+            )}
+
+            {/* Main Card */}
+            <article className="group relative bg-white border border-gray-200 hover:border-black transition-all duration-300 hover:shadow-lg cursor-pointer overflow-hidden">
+                {/* Image Container */}
+                <div className="relative overflow-hidden aspect-video">
+                    <img
+                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                        src={postInfo.featuredImage || img}
+                        alt={`${postInfo.title || postName} image`}
+                    />
+                    
+                    {/* New Badge */}
+                    {newStatus && (
+                        <div className="absolute top-3 left-3">
+                            <span className="px-2 py-1 text-xs font-bold tracking-wide text-white bg-black uppercase">
+                                New
+                            </span>
+                        </div>
+                    )}
+                    
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                    {/* Author Info */}
+                    <div className="flex items-center gap-3 mb-4">
+                        <img 
+                            src={postInfo.author?.avatar} 
+                            alt="profile image" 
+                            className="w-10 h-10 rounded-full border border-gray-200" 
+                        />
+                        <div>
+                            <p className="font-medium text-sm text-black">{postInfo.author?.name}</p>
+                            <div className="flex items-center gap-2 text-xs text-gray-600">
+                                <Calendar className="w-3 h-3" />
+                                <span>{formatDate(postInfo.createdAt)}</span>
+                                <span>•</span>
+                                <Clock className="w-3 h-3" />
+                                <span>{estimateReadingTime(postInfo.content)} min read</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Title and Summary */}
+                    <div className="mb-6">
+                        <h3 className="text-xl font-bold text-black mb-2 line-clamp-2 group-hover:text-gray-800 transition-colors">
+                            {postInfo.title || postName}
+                        </h3>
+                        <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                            {truncateText(postInfo.summary || formattedContent, 140)}
+                        </p>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="border-t border-gray-100 mb-4"></div>
+
+                    {/* Stats */}
+                    <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-1.5 text-gray-600 hover:text-black transition-colors">
+                                <Eye className="w-4 h-4" />
+                                <span>0</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-gray-600 hover:text-black transition-colors">
+                                <MessageCircle className="w-4 h-4" />
+                                <span>{postInfo.comments?.length || 0}</span>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-gray-600 hover:text-red-500 transition-colors">
+                            <Heart className="w-4 h-4" />
+                            <span>{postInfo.likes?.length || 0}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-black transition-all duration-300 pointer-events-none"></div>
+            </article>
         </div>
-      )}
-
-      <Link to={`/blogs/${postInfo.slug}`} className={`relative group border-1 border-black cursor-pointer ${feature ? 'w-1/3' : 'w-full'}`}>
-        {/* Image */}
-        <div className="overflow-hidden aspect-w-1 aspect-h-1">
-          <img
-            className="object-cover w-full h-74 transition-all duration-300 group-hover:scale-125"
-            src={postInfo.featuredImage || img}
-            alt={`${postInfo.title || postName} image`}
-          />
-        </div>
-
-        {/* New status */}
-        {newStatus && (
-          <div className="absolute left-3 top-3">
-            <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-700 uppercase bg-white">New</p>
-          </div>
-        )}
-
-        {/* Text */}
-        <div className="flex flex-col">
-          <div className="p-3">
-            <div className="flex gap-2 font-poppins text-sm mb-3">
-              <img src={postInfo.author?.avatar} alt="profile image" className="w-8 h-8" />
-              <div className="self-center">{postInfo.author?.name}</div>
-            </div>
-            <div className="flex font-geist text-sm gap-2">
-              <div>{formatDate(postInfo.createdAt)}</div>
-              <div> &#183;</div>
-              <div>{estimateReadingTime(postInfo.content)} min read</div>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-2 p-3 text-md h-40">
-            <div className="font-poppins">{postInfo.title}</div>
-            <div className="font-roboto text-sm">{truncateText(postInfo.summary || formattedContent)}</div>
-          </div>
-
-          <div className="flex justify-center my-0">
-            <Line width="w-64" />
-          </div>
-
-          <div className="flex justify-between py-2 px-1">
-            <div className="flex items-center justify-center gap-4">
-              <div className="flex gap-2 justify-center items-center">
-                <Eye className="w-4 h-4 self-center"/>
-                <div>0</div>
-              </div>
-              <div className="flex gap-2">
-                <MessageCircle className="w-4 h-4 self-center" />
-                <div>{postInfo.comments?.length || 0}</div>
-              </div>
-            </div>
-            <div className="flex flex-row-reverse gap-2">
-              <Heart className="w-4 h-4 self-center" />
-              <div>{postInfo.likes?.length || 0}</div>
-            </div>
-          </div>
-        </div>
-      </Link>
-    </div>
-  );
+    );
 }

@@ -5,6 +5,7 @@ export function usePosts() {
     queryKey: ['posts'],
     queryFn: async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/posts`);
+      console.log('Respnse:',res)
       return res.json();
     },
   });
