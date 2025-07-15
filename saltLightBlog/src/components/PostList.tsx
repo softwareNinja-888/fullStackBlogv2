@@ -1,5 +1,7 @@
 import { usePosts } from '../hooks/usePosts';
 import { Card } from "./Card";
+import { LogoSvg } from './helper/LogoSvg';
+
 
 function Spinner() {
   return (
@@ -27,9 +29,11 @@ export function PostList() {
     <section className="py-8 sm:py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <div className="text-xl sm:text-2xl text-gray-800 mb-3 sm:mb-4">✝</div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
+        <div className="flex flex-col text-center mb-8 sm:mb-10 md:mb-12">
+          <div className="mx-auto my-3">
+              <LogoSvg/>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2 ">
             Latest Posts
           </h2>
           <div className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-black mx-auto mb-4 sm:mb-6"></div>

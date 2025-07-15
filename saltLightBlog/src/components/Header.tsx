@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export function Header({
     logoImg='/logo.svg',
-    links=['Home','Blogs','Log In/Sign Up',],
+    links=['Home','Log In/Sign Up',],
     btnName="Let's Talk",
     sticky=true,
   }) {
