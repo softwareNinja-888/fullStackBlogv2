@@ -1,4 +1,6 @@
 import { Eye, MessageCircle, Heart, Clock, Calendar } from "lucide-react";
+import { Link } from '@tanstack/react-router';
+
 
 function truncateText(text, maxLength = 244) {
     if (text === undefined) {
@@ -24,7 +26,7 @@ export function Card({
     width = 'w-80 lg:w-100',
 }) {
 
-    console.log('feature:',postInfo.featuredImage)
+    console.log('summary:',postInfo)
     const getSummary = (content, maxLength = 160) => {
         if (typeof content !== 'string') return '';
         return content.length > maxLength
@@ -51,7 +53,7 @@ export function Card({
     }
 
     return (
-        <div className={`${width} p-2 sm:p-4 mx-auto`}>
+        <Link to="/blogs/$slug" params={{ slug: postInfo.slug }} prefetch="hover" className={`block ${width} p-4 sm:p-4 mx-auto`}>
             {/* Featured Badge */}
             {feature && (
                 <div className="mb-2 sm:mb-4">
@@ -62,7 +64,7 @@ export function Card({
             )}
 
             {/* Main Card */}
-            <article className="group relative bg-white border border-gray-200 hover:border-black transition-all duration-300 hover:shadow-lg cursor-pointer overflow-hidden">
+            <article className="group relative bg-white border hover:border-black transition-all duration-300 hover:shadow-lg cursor-pointer overflow-hidden">
                 {/* Image Container */}
                 <div className="relative overflow-hidden aspect-video sm:aspect-video">
                     <img
@@ -127,12 +129,12 @@ export function Card({
                             </div>
                             <div className="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-black transition-colors">
                                 <MessageCircle className="w-4 h-4" />
-                                <span className="text-xs sm:text-sm">{postInfo.comments?.length || 0}</span>
+                                <span className="text-xs sm:text-sm">{postInfo.comments?.length}</span>
                             </div>
                         </div>
                         <div className="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-red-500 transition-colors">
                             <Heart className="w-4 h-4" />
-                            <span className="text-xs sm:text-sm">{postInfo.likes?.length || 0}</span>
+                            <span className="text-xs sm:text-sm">{postInfo.likes?.length}</span>
                         </div>
                     </div>
                 </div>
@@ -140,6 +142,6 @@ export function Card({
                 {/* Hover Effect Border */}
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-black transition-all duration-300 pointer-events-none"></div>
             </article>
-        </div>
+        </Link>
     );
 }

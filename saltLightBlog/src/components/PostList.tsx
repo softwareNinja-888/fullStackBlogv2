@@ -1,15 +1,7 @@
 import { usePosts } from '../hooks/usePosts';
 import { Card } from "./Card";
 import { LogoSvg } from './helper/LogoSvg';
-
-
-function Spinner() {
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-      <div className="w-12 h-12 border-4 border-gray-800 border-t-transparent rounded-full animate-spin"></div>
-    </div>
-  );
-}
+import { Spinner } from './helper/Spinner';
 
 export function PostList() {
   const { data: posts, isLoading, error } = usePosts();
@@ -37,7 +29,7 @@ export function PostList() {
             Latest Posts
           </h2>
           <div className="w-16 sm:w-20 md:w-24 h-0.5 sm:h-1 bg-black mx-auto mb-4 sm:mb-6"></div>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-xs sm:max-w-lg md:max-w-2xl mx-auto leading-relaxed px-4">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-xs sm:max-w-lg md:max-w-2xl mx-auto leading-relaxed px-4 font-mont">
             Join us on this spiritual journey as we explore faith, hope, and love through the lens of Scripture
           </p>
         </div>

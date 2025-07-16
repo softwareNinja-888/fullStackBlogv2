@@ -32,10 +32,17 @@ const blogsRoute = createRoute({
 });
 
 const BlogPageRoute = createRoute({
-  path: '/blogs/$id',
+  path: '/blogs/$slug',
   getParentRoute: () => rootRoute,
+  loader: async ({ params }) => {
+    const res = await fetch(`http://localhost:3000/api/posts/${params.slug}`)
+    if (!res.ok) throw new Error('Failed to fetch blog post')
+    const data = await res.json()
+    return data
+  },
   component: BlogPage,
-});
+})
+
 
 const routeTree = rootRoute.addChildren([
   createRoute({

@@ -44,20 +44,20 @@ export function MobileMenu({ menuOpen, setMenuOpen,links=[''] }){
 
       {/* Animated Menu */}
       <motion.div
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white"
         initial="closed"
         animate={menuOpen ? "open" : "closed"}
         variants={menuVariants}
       >
         {/* CLOSE BTN */}
-        <X onClick={() => setMenuOpen(false)} className="absolute top-10 right-10 text-2xl w-5"/>
+        <X onClick={() => setMenuOpen(false)} className="absolute top-10 right-10 text-2xl w-5 text-black"/>
 
         {/* Links */}
         <nav className="flex flex-col space-y-4 text-lg font-poppins items-center">
           {links.map((link,index)=>{
               return (
                   
-                  <div key={index} className={`flex gap-1.5 no-underline relative cursor-pointer after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:opacity-0 after:transition-opacity after:duration-300 after:ease-in-out hover:after:opacity-100 hover:after:bg-white  text-white max-[500px]:text-xs` } onClick={()=>{handleNav(`/${link === 'Home' ? '' : link}`)}}>
+                  <div key={index} className={`flex gap-1.5 no-underline relative cursor-pointer after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:opacity-0 after:transition-opacity after:duration-300 after:ease-in-out hover:after:opacity-100 hover:after:bg-white  text-black max-[500px]:text-xs` } onClick={()=>{handleNav(`/${link === 'Home' ? '' : link}`)}}>
                       {link}
                   </div>
               )
