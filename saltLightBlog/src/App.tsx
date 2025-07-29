@@ -6,8 +6,10 @@ import './App.css'
 
 // PAGES:
 import Home from './pages/Home';
-import {Blogs} from './pages/Blogs';
+import { Blogs } from './pages/Blogs';
+import { Auth } from './pages/Auth';
 import BlogPage from './pages/BlogPage';
+
 import { Layout } from './pages/Layout';
 
 
@@ -31,6 +33,12 @@ const blogsRoute = createRoute({
   component: Blogs,
 });
 
+const loginRoute = createRoute({
+  path:'/auth',
+  getParentRoute: ()=> rootRoute,
+  component: Auth,
+})
+
 const BlogPageRoute = createRoute({
   path: '/blogs/$slug',
   getParentRoute: () => rootRoute,
@@ -51,6 +59,7 @@ const routeTree = rootRoute.addChildren([
     component: () => <Home/>,
   }),
   blogsRoute,
+  loginRoute,
   BlogPageRoute,
 ]);
 

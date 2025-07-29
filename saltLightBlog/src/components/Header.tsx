@@ -11,7 +11,6 @@ import { useQuery } from '@tanstack/react-query';
 
 export function Header({
     logoImg='/logo.svg',
-    links=['Home','Log In/Sign Up',],
     btnName="Let's Talk",
     sticky=true,
   }) {
@@ -30,11 +29,7 @@ export function Header({
 
  
   function handleNav(path) {
-    if (!path || typeof path !== 'string') return;
-
-    const cleaned = '/' + path.trim().replace(/\s+/g, '').toLowerCase();
-
-    navigate({ to: cleaned });
+    navigate({ to: path });
   }
 
 
@@ -43,8 +38,10 @@ export function Header({
     if (error) console.error('Error fetching:', error);
   }, [data, error]); 
 
-   // return <h1>{isLoading ? 'Loading title...' : data?.title}</h1>;
-
+    const links = [
+        {id:0,name:'Home',link:'/'},
+        {id:1,name:'Log In/Sign Up',link:'/auth'},
+    ]
     return ( 
         <>
           <div className={`${sticky ? 'sticky top-0 z-50' : ''}`}>
@@ -57,10 +54,10 @@ export function Header({
                 
                 {/*LINKS*/}
                 <nav className={`hidden md:flex md:space-x-10 lg:space-x-20 text-xl font-mont`}>
-                    {links.map((link,index)=>{
+                    {links.map((link)=>{
                         return ( 
-                            <div key={index} className={`flex gap-1.5 no-underline relative cursor-pointer after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:opacity-0 after:transition-opacity after:duration-1000 after:ease-in-out hover:after:opacity-100 hover:after:bg-black text-black max-[500px]:text-xs` } onClick={()=>{handleNav(`/${link === 'Home' ? '' : link}`)}}>
-                                {link}
+                            <div key={link.id} className={`flex gap-1.5 no-underline relative cursor-pointer after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:opacity-0 after:transition-opacity after:duration-1000 after:ease-in-out hover:after:opacity-100 hover:after:bg-black text-black max-[500px]:text-xs` } onClick={()=>{handleNav(`/${link.link}`)}}>
+                                {link.name}
                             </div>
                         )
                     })}
